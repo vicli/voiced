@@ -3,17 +3,25 @@
 <head>
   <title>Voiceapp</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "custom" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if user_signed_in? %>
-          <li><%= link_to(current_user.name, profile_path(current_user.id)) %></li>
-          <%= render "notifications/notifications" %>
-          <li><%= link_to("Logout", destroy_user_session_path, :method=> 'delete') %></li>
+<div class = "nav">
+	<div class = "navbar" >
+		<% if user_signed_in? %>
+	    	<li><%= link_to "Logout", destroy_user_session_path, :method=> 'delete' %></li>
+		<% else %>
+			<li> <%= link_to "Sign Up", new_user_registration_path %></li>
+			<li> <%= link_to "Login", new_user_session_path %></li></br>
 
-          <% end %>
+		<% end %>
+
+	</div>
+</div> 
+
 <%= yield %>
 
 </body>

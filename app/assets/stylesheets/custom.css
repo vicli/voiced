@@ -1,0 +1,44 @@
+/*******  CUSTOM FONT SET UP******/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,600,800,700,300);
+
+/******* NAVIGATION BAR *******/
+
+.body{
+	font-family: Arial;
+}
+.navbar{
+	float: right;
+}
+.navbar li{
+	text-decoration: none;
+	list-style: none;
+	float:left;
+	padding-left: 10px;
+	font-family: 'Open Sans';
+	padding-right: 10px;
+}
+
+.navbar li a{
+	text-decoration: none;
+}
+
+
+/******* MAIN BLOCK *******/
+
+.main{
+	font-family: 'Open Sans'
+}
+
+
+/******* FORMS *******/
+
+.forms{
+	padding:20px;
+	background-color: gray;
+	width: 300px;
+	margin-left: 25%;
+	border-radius: 5px;
+	font-family: 'Open Sans';
+}
+
