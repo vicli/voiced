@@ -8,6 +8,7 @@ gem 'rails', '3.2.12'
 gem 'sqlite3'
 
 gem 'devise'
+gem 'twilio'
 
 gem "flat-ui-rails"
 
