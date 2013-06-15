@@ -7,6 +7,8 @@ class CreateReminders < ActiveRecord::Migration
       t.datetime :playtime
       t.string :image
       t.integer :number
+      t.integer :caller_id
+      t.intger :callee_id
 
       t.timestamps
     end
