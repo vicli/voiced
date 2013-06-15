@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  file: MyString
+  playtime: 2013-06-15 13:20:40
+  image: MyString
+  number: 1
+
+two:
+  name: MyString
+  description: MyString
+  file: MyString
+  playtime: 2013-06-15 13:20:40
+  image: MyString
+  number: 1
