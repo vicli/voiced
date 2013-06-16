@@ -79,10 +79,10 @@
       url: url,
       success: function(data, status, jqXHR){
         filepicker.store(data, {filename: filename + '.wav'}, function(fpfile){
-          Reminder.setURL(fpfile.url);
+          Reminder.url(fpfile.url);
         });
       }
     })
   };
   window.Recorder = Recorder;
-})(window);
+})(window, jQuery);

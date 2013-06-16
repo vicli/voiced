@@ -35,6 +35,8 @@ function toggleRecording( e ) {
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( drawWave );
+
+        
     } else {
         // start recording
         if (!audioRecorder)
