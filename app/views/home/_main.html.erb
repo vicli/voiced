@@ -40,6 +40,7 @@
 		<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
+					<img src="../s1.png">
 				</div>
 				<div style="width:10px; height: 40px; float:left"></div>
 				<div class="feed-content">
@@ -49,6 +50,7 @@
 					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
+					<img src="../s2.png">
 				</div>
 				<div style="width:10px; height: 40px; float:left"></div>
 				<div class="feed-content">
@@ -58,6 +60,7 @@
 					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
+					<img src="../s2.png">
 				</div>
 				<div style="width:10px; height: 40px; float:left"></div>
 				<div class="feed-content">
@@ -67,6 +70,7 @@
 					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
+					<img src="../s1.png">
 				</div>
 				<div style="width:10px; height: 40px; float:left"></div>
 				<div class="feed-content">
@@ -75,27 +79,50 @@
 			</div>
 		</div>
 
+		<script type="text/javascript">
+		$('#recordoption').change(function(){
+		     var selection = $(this).val();
+		     alert(selection);
+		    switch(selection){
+		    case "voice":
+		    	$("#recordpanel").show();
+		    case "pick":
+		    	$('#pickvoice').show()
+		   break;
+		    default:
+		    $("#otherType").hide()
+		    }
+		});
+		</script>
+
 		<form class = "newrecord">
 			<h2>Create a new reminder:</h2>
-			<div class="record-panel clearfix" style=" position: relative;">
+
+			<select name="recordoption" id = "recordoption">
+					<option value="voice">Record your own</option>
+					<option value="pick">Pick a voice</option>
+			</select>
+
+			<div class="record-panel clearfix" id = "recordpanel" style="display:none; position: relative;">
 				<div class="pull-left" style="width: 100px; padding: 0px 3px 3px 0px">
 					<canvas id="analyser" width="100" height="20"></canvas>
 					<canvas id="wavedisplay" width="100" height="20"></canvas>
 				</div>
 				<div class = "record" id="record" style="width: 50px;cursor:pointer;" onclick="toggleRecording(this)" class="pull-left">Record</div>
-				<div><img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" class="pull-left" onclick="saveAudio();"></div>
-				<select name="voices" >
+				<div class ="save" style="width: 50px;cursor:pointer;" class="pull-left" onclick="saveAudio();">Save</div>
+			</div>
+
+				<select name="voices" id = "pickvoice" style = "display:none">
 					<option value="1">Voice 1</option>
 					<option value="2">Voice 2</option>
 					<option value="3">Voice 3</option>
 					<option value="4">Voice 4</option>
 				</select>
 				<div><input type = "text" name = "datetime" id = "datetime" placeholder = "Select time and date"></div>
-				<div><input type = "text" name = "number" id = "number" placeholder = "Enter Number"><div>
+				<div><input type = "text" name = "number" id = "number" placeholder = "Enter Number"></div>
 				<input type = "textarea" name = "texttospeech" id = "texttospeech" height = "30px" placeholder = "Enter Text">
 				<input type="checkbox" name="self" value="self">Self<br>
-				<input type="submit" value="Submit">
-			</div>
+				<input type="submit" value="Submit" >
 		</form>
 
 	</div>
