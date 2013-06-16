@@ -31,7 +31,7 @@ var VoiceRecording = function() {
 
 window.view_helper = {
 	pretty_date : function(date_str) {
-	  var seconds = this.get_seconds(date_str);
+	  var seconds = this.get_seconds(date_str) - 60*60*4;
 	  var token = 'ago';
 	  list_choice = 1;
 	  if (seconds < 0) {
