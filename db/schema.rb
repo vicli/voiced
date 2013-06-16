@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616035148) do
+ActiveRecord::Schema.define(:version => 20130616050636) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(:version => 20130616035148) do
     t.string   "profile_image"
     t.integer  "friendships"
     t.integer  "inverse_friendships"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "number"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

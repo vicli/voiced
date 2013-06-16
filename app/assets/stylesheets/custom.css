@@ -92,6 +92,17 @@ html{
 	text-decoration: none;
 	text-align: center;
 }
+
+.bluebutton{
+	background-color: #2980B9;
+	min-width: 100px;
+	border: none;
+	border-radius: 6px;
+	padding: 10px;
+	color:#ffffff;
+	font-size: 18px;
+}
+
 #mainbutton{
 	position: absolute;
 	margin-left: 100px;
@@ -111,4 +122,6 @@ html{
            -moz-border-radius: 5px;
                 border-radius: 5px;
 }
-
+.form-signin{
+	text-align: center;
+}
