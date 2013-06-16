@@ -2,7 +2,9 @@ Voiceapp::Application.routes.draw do
   devise_for :users
 
   root to: "home#index"
-  
+  authenticated :user do
+  root :to => "home#index"
+  end
   namespace :user do
     root :to => "home#index"
   end
