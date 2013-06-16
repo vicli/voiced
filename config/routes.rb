@@ -2,9 +2,9 @@ Voiceapp::Application.routes.draw do
   devise_for :users
 
   root to: "home#index"
-  match '/trigger' => "twillio#trigger", :via => ['post']
+  match '/trigger' => "twillio#trigger"
   match '/trigger_reminder' => "twillio#trigger_reminder"
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

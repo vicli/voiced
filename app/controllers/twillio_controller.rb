@@ -7,7 +7,7 @@ class TwillioController < ApplicationController
 		@call = @client.account.calls.create(
 		  :from => '+13476172295',
 		  :to => '+16173592736',
-		  :url => 'http://voicechat.herokuapp.com/trigger_reminder'
+		  :url => 'http://voicechat.herokuapp.com/trigger_reminder?id=#{params[:id]}'
 		)
 		render :nothing => true
 	end
