@@ -101,31 +101,7 @@
 		    }
 		});
 		</script>
-
-<!-- 		<form class = "newrecord" action="/reminders" method="post" >
-			
-
-			<select name="_type" id = "_type">
-					<option>Select ...</option>
-					<option value="1">Record your own</option>
-					<option value="2">Pick a voice</option>
-			</select>
-
-			
-
-				<select name="gender" id = "gender" >
-					<option value="1">Female</option>
-					<option value="2">Male</option>
-				</select>
-				<div><input type = "text" name = "playtime" id = "playtime" placeholder = "Select time and date"></div>
-				<div><input type = "text" name = "callee" id = "callee" placeholder = "Enter Friend"></div>
-				<div><input type = "text" name = "number" id = "number" placeholder = "Enter Number"></div>
-
-				<input type = "textarea" name = "message" id = "message" height = "30px" placeholder = "Enter Text">
-				<input type="checkbox" name="self" value="self">Self<br>
-				<input type="submit" value="Submit" >
-
-		</form> -->
+	<div class = "newrecord">
 		<%= form_for @reminder, :action => :create do |f| %>
 		<h2>Create a new reminder:</h2>
 		<%= f.select :_type,  options_for_select([['Record your own', 1], ['Pick a voice', 2]]) %>
@@ -145,7 +121,7 @@
 		  <%= f.submit "Create" %>
 		<% end %>
 		</div>
-	</div>
+
 </div>
 
 <script type="text/template" id="feed-item-template">
