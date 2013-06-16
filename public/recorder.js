@@ -78,9 +78,8 @@
       type: "GET",
       url: url,
       success: function(data, status, jqXHR){
-        filepicker.store(data, {filename: filename, mimetypes: ['audio/*','audio/x-wav', 'audio/wav', 'audio/wave', 'audio/mpeg']}, function(fpfile){
+        filepicker.store(data, {filename: filename, mimetypes: ['audio/*']}, function(fpfile){
           $("#new_reminder").prepend("<input type=\"hidden\" name=\"reminder[file]\" value=\""+fpfile.url + "\"/>");
-
         });
       }
     })
