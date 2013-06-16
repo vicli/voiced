@@ -24,7 +24,7 @@
 		<div class = "newrecord">
 			<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
 
-			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
+			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2], ['Hire voice actor', 3]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
 
 				<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
 					<div><%= f.text_field :file, :style=> "width:250px", :placeholder => "Url to Audio file", :id=> "file"%></div>

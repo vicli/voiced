@@ -28,7 +28,7 @@ class TwillioController < ApplicationController
 		account_sid = 'AC8b70300105eb2b524cc293ba3339fc49'
 		auth_token = '0947cdfdd17a0cc08e9c088bed3db60a'
 		@client = Twilio::REST::Client.new account_sid, auth_token
-		@reminder = params[:id]
+		@reminder = Reminder.find_by_id(params[:id])
 		unless @reminder
 			msg = Twilio::TwiML::Response.new do |r|
     		r.Play "http://voicebunny.s3.amazonaws.com/live/624A3694C18735F332E2_ori_dfc1e.wav"
