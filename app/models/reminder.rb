@@ -25,6 +25,7 @@ class Reminder < ActiveRecord::Base
   end
 
 	def trigger
+		puts "in trigger"
 		if _type == 1
 			return play_file
 		elsif _type == 2
