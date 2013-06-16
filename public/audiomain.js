@@ -16,6 +16,8 @@ var recIndex = 0;
 
 function saveAudio() {
     audioRecorder.exportWAV( doneEncoding );
+    document.getElementById('save').innerHTML = 'Saved';
+    document.getElementById('save').style.backgroundColor='gray';
 }
 
 function drawWave( buffers ) {
