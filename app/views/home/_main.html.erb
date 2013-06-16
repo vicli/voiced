@@ -26,13 +26,14 @@
 
 			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
 
-			<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
-					<div style="width: 100px;  padding: 0px 3px 3px 0px">
+				<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
+					<div><%= f.text_field :file, :style=> "width:250px", :placeholder => "Url to Audio file", :id=> "file"%></div>
+					<!-- <div style="width: 100px;  padding: 0px 3px 3px 0px">
 						<canvas id="analyser" width="250" height="40" ></canvas>
 						<canvas id="wavedisplay" width="250" height="40"></canvas>
 					</div>
 					<div class = "record" id="record" style="margin-left:50px;width: 50px;cursor:pointer;" onclick="toggleRecording(this)"c>Record</div>
-					<div class ="save" id = "save" style="width: 50px; cursor: pointer" onclick="saveAudio()">Save</div>
+					<div class ="save" id = "save" style="width: 50px; cursor: pointer" onclick="saveAudio()">Save</div> -->
 				</div>
 				<div id = "voice" style = "display:none">
 					<div><%= f.select :gender, options_for_select([['Female', 1], ['Male', 2]]), {}, {:style => "min-width:250px"}%></div>
@@ -51,25 +52,11 @@
 			d = document.getElementById("choice_id").value;
 			if (d ==1){
 				$('#voice').hide();
-				filepicker.pickAndStore({
-			    	mimetype:"audio/*",
-			    	'multiple': false
-			    },
-			    {
-			    	location:"S3",
-			  	}, 
-			    function(fpfiles){
-			    	_.each(fpfiles, function(file){
-			    	$("[name='reminder[file]']").remove();
-			    	$("#new_reminder").prepend("<input type=\"hidden\" name=\"reminder[file]\" value=\""+file.url + "\"/>");
-			    	console.log(file);
-			    	$("#choice_id").after("<div id='upload_file_name'>"+file.filename+"</div>");
-			    	});
-				});
+				$('.record-panel.clearfix').slideToggle(400);
 			}
 			if (d ==2){
 				$('.record-panel.clearfix').hide()
-				$('#voice').slideToggle(600);
+				$('#voice').slideToggle(400);
 			}
 		}
 	</script>
