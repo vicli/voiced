@@ -83,14 +83,13 @@
 					<canvas id="wavedisplay" width="100" height="20"></canvas>
 				</div>
 				<div class = "record" id="record" style="width: 50px;cursor:pointer;" onclick="toggleRecording(this)" class="pull-left">Record</div>
-				<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" class="pull-left" onclick="saveAudio();">
-			
-				<div><select name="voices" >
+				<div><img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" class="pull-left" onclick="saveAudio();"></div>
+				<select name="voices" >
 					<option value="1">Voice 1</option>
 					<option value="2">Voice 2</option>
 					<option value="3">Voice 3</option>
 					<option value="4">Voice 4</option>
-				</select></div>
+				</select>
 				<div><input type = "text" name = "datetime" id = "datetime" placeholder = "Select time and date"></div>
 				<div><input type = "text" name = "number" id = "number" placeholder = "Enter Number"><div>
 				<input type = "textarea" name = "texttospeech" id = "texttospeech" height = "30px" placeholder = "Enter Text">
