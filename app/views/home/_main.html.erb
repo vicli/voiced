@@ -1,10 +1,4 @@
-<!-- <div class = "recordPanel">
-	<canvas id="analyser" width="300" height="100"></canvas><br>
-	<canvas id="wavedisplay" width="300" height="100"></canvas><br>
-	<img id="record" width="128" height="128" src="http://webaudiodemos.appspot.com/AudioRecorder/img/mic128.png" onclick="toggleRecording(this);"><br>
-	<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" onclick="saveAudio();">
 
-</div> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
  <script type="text/javascript">
     // rails uses  so I will use [[ ]] and [[= ]]
@@ -12,21 +6,8 @@
         interpolate: /\[\[\=(.+?)\]\]/g,
         evaluate: /\[\[(.+?)\]\]/g
     };
+
 </script>
-
-
-<!-- 	<div class = "rightpanel">
-		<div class = "recordPanel">
-			<canvas id="analyser" width="100" height="20" float:"left"></canvas><br>
-			<canvas id="wavedisplay" width="100" height="20" float:"left"></canvas><br>
-			<div class = "record" id = "record" onclick = "toggleRecording(this)">Record</div>
-			<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" onclick="saveAudio();">
-			<div><input type = "text" name = "datetime" id = "datetime"></div>
-
-		</div>
-	</div> -->
-
-
 <script>
 	window.user = <%= raw current_user.to_json %>;
 	user['reminders'] = <%= raw current_user.given_reminders.to_json %>.concat(<%= raw current_user.reminders.to_json %>).sort(function(a,b){
@@ -37,29 +18,29 @@
 	});
 
 </script>
-
+<body style="background-color:#232323;">
 	<div class = "leftpanel">
-		<%= link_to "Edit",   edit_user_registration_path %>
-		<h3 onclick = "$('.newrecord').slideToggle(600); mouse:cursor" style = "text-align:center;"> Create a new reminder:</h3>
+		<h3 onclick = "$('.newrecord').slideToggle(600);" style = "text-align:center; cursor: pointer" class = "newreminder"> New Reminder</h3>
 		<div class = "newrecord">
 			<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
 
-			<%= f.select :_type,  options_for_select([['Select', 0],['Record your own', 1], ['Pick a voice', 2]]), {},{:onchange => "change()", :id => "choice_id"} %>
+			<%= f.select :_type,  options_for_select([['Select', 0],['Record your own', 1], ['Pick a voice', 2]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
 
-			<div class="record-panel clearfix" id = "recordpanel" style="display:none; position: relative; text-align:center">
-					<div class="pull-left" style="width: 100px; margin-left:150px; padding: 0px 3px 3px 0px">
-						<canvas id="analyser" width="60" height="20"></canvas>
-						<canvas id="wavedisplay" width="60" height="20"></canvas>
+			<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
+					<div style="width: 100px;  padding: 0px 3px 3px 0px">
+						<canvas id="analyser" width="250" height="40" ></canvas>
+						<canvas id="wavedisplay" width="250" height="40"></canvas>
 					</div>
-					<div class = "record" id="record" style="width: 50px;cursor:pointer;" onclick="toggleRecording(this)" class="pull-left">Record</div>
-					<div class ="save" style="width: 50px;" class="pull-left" onclick="saveAudio();">Save</div>
+					<div class = "record" id="record" style="margin-left:50px;width: 50px;cursor:pointer;" onclick="toggleRecording(this)"c>Record</div>
+					<div class ="save" id = "save" style="width: 50px; cursor: pointer" onclick="saveAudio()">Save</div>
 				</div>
 				<div id = "voice" style = "display:none">
-					<div><%= f.select :gender, options_for_select([['Female', 1], ['male', 2]]) %></div>
-					<div><%= f.text_area :message, :placeholder => "Enter Message", :size => "20x2" %></div>
+					<div><%= f.select :gender, options_for_select([['Female', 1], ['Male', 2]]), {}, {:style => "min-width:250px"}%></div>
+					<div><%= f.text_area :message, :style => "width:250px",:placeholder => "Enter Message", :size => "20x2" %></div>
 				</div>
-			  <div><%= f.text_field :playtime, :placeholder => "Select time and date", :id => "playtime" %></div>
-			   <div><%= f.text_field :number, :placeholder => "Enter Number" %></div>
+			  <div><%= f.text_field :playtime, :style => "width:250px",:placeholder => "Select time and date", :id => "playtime" %></div>
+			  
+			   <div><%= f.text_field :number, :style => "width:250px", :placeholder => "Enter Number" %></div>
 			  
 			  <%= f.submit "Create", :id=>"create_reminder" %>
 			<% end %>
@@ -69,9 +50,11 @@
 		function change() {
 			d = document.getElementById("choice_id").value;
 			if (d ==1){
+				$('#voice').hide();
 				$('.record-panel.clearfix').slideToggle(600);
 			}
 			if (d ==2){
+				$('.record-panel.clearfix').hide()
 				$('#voice').slideToggle(600);
 			}
 		}
@@ -115,9 +98,10 @@
 <script type="text/template" id="feed-item-template">
 	<div class="feed-item clearfix">
 		<div class="feed-icon pull-left">
+			<img src = '../tick.png' >
 		</div>
 		<div style="width:10px; height: 40px; float:left"></div>
-		<div class="feed-content">
+		<div class="feed-content" style = "padding-top:15px">
 			[[ if  (window.user.id == callee.id && (Date.parse(playtime)- (new Date()) > 0 ) ){ ]]
 
 				<b>
@@ -143,7 +127,6 @@
 			</a>[[ } else { ]][[= number ]][[ } ]]</b> went off [[= pretty_date(playtime) ]]
 			[[ } ]]
 		</div>
-		<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg"></img>
 	</div>
 </script>
 
@@ -159,4 +142,5 @@
     });
 	
 </script>
+</body>
 

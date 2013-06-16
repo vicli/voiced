@@ -17,6 +17,11 @@ html{
 	background-color: #F4F4F4;
 	position: relative;
 }
+
+canvas{
+	background-color:#232323 ;
+	border:0.5px solid #fff;
+}
 .nav{
 	
 	width: 100%;
@@ -30,11 +35,11 @@ html{
 	height:60px;
 }
 .navbar .nav li a {
-	color:#840000;
+	color:#2980B9;
 }
 
 .navbar .nav li a:hover {
-	color: #C0392B;
+	color: #3E8AB5;
 }
 
 .navbar .nav li{
@@ -75,10 +80,6 @@ html{
 	position: absolute;
 	font-size: 24px;
 	padding: 20px;
-/*	border-radius: 5px;
-	border: 3px solid #fff;
-	
-	opacity: 0.6;*/
 	line-height: 26px;
 	margin: 100px;
 	background-color: #F4F4F4;
@@ -118,7 +119,7 @@ html{
 	min-width: 100px;
 	border: none;
 	border-radius: 6px;
-	padding: 10px;
+	padding: 5px;
 	color:#ffffff;
 	font-size: 18px;
 }
@@ -130,6 +131,14 @@ html{
 	padding: 10px;
 	color:#ffffff;
 	font-size: 18px;
+}
+.newreminder{
+	background-color: #2980B9;
+	min-width: 100px;
+	border-radius: 6px;
+	color:#ffffff;
+	opacity: 0.9;
+	padding: 5px;
 }
 
 #mainbutton{
@@ -167,12 +176,13 @@ html{
 	width: 60px;
 	margin: 5px;
 	padding: 5px;
-	height: 25px;
+	height: 20px;
 	border-radius: 3px;
 	text-align: center;
 	background-color: #2980B9;;
 	color:white;
 	font-size: 14px;
+	margin-bottom: 10px;
 }
 
 .save{
@@ -180,11 +190,12 @@ html{
 	width: 60px;
 	margin: 5px;
 	padding: 5px;
-	height: 25px;
+	height: 20px;
 	border-radius: 3px;
 	text-align: center;
 	background-color: #2980B9;;
 	color:white;
+	margin-bottom: 10px;
 	font-size: 14px;
 }
 /******* FORMS *******/
@@ -212,6 +223,7 @@ html{
 
 .feed-item {
 	border-bottom: 1px solid rgba(0,0,0,.2);
+	margin-bottom: 3px;
 	background-color: #eee;
 	height: 60px;
 }
@@ -232,14 +244,12 @@ html{
 	padding: 5px;
 	width: 40px;
 	height: 40px;
-	background-repeat: no-repeat;
-	background-color: #bce0e1;
 }
 
 .feed-content {
 	margin: 5px 60px 0px 10px;
 }
-
+#ui-datepicker-div { display: none; }
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
 .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
