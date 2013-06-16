@@ -131,6 +131,14 @@ html{
 	color:#ffffff;
 	font-size: 18px;
 }
+.newreminder{
+	background-color: #2980B9;
+	min-width: 100px;
+	border-radius: 6px;
+	color:#ffffff;
+	opacity: 0.9;
+	padding: 10px;
+}
 
 #mainbutton{
 	position: absolute;
