@@ -3,21 +3,33 @@ class TwillioController < ApplicationController
 	include TwillioHelper
 	before_filter :setup
 	
+	def trigger
+		@call = @client.account.calls.create(
+		  :from => '+13476172295',
+		  :to => '+16173592736',
+		  :url => 'http://voicechat.herokuapp.com/trigger_reminder'
+		)
+		render :nothing => true
+	end
+
 	def trigger_reminder
-		if @reminder.type == 1
-			play_file params
-		elsif @reminder.type == 2
-			text_tp_speech params
+		message = @reminder.trigger
+		if message
+			render :xml => message
+		else
+	    msg = Twilio::TwiML::Response.new do |r|
+	      r.Say 'This reminder is broken'
+	    end.text
+	    render :xml => msg
 		end
-		render :nothing => true, :status => 500
 	end
 
 	def setup
-		account_sid = '0947cdfdd17a0cc08e9c088bed3db60a'
-		auth_token = 'AC8b70300105eb2b524cc293ba3339fc49'
+		account_sid = 'AC8b70300105eb2b524cc293ba3339fc49'
+		auth_token = '0947cdfdd17a0cc08e9c088bed3db60a'
 		@client = Twilio::REST::Client.new account_sid, auth_token
-		@reminder = Reminder.find_by_id(params[:recording_id])
-		redirect_to root_url if @reminder.nil?
+		@reminder = Reminder.find_by_id(params[:id])
+		redirect_to root_url if @reminder.nil? || @reminder.triggered
 	end
 
 end
