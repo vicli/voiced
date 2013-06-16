@@ -14,7 +14,7 @@ html{
 	font-family: Arial;
 	margin: 0px;
 	padding: 0px;
-	background-color: black;
+	background-color: #F4F4F4;
 	position: relative;
 }
 .nav{
@@ -37,8 +37,8 @@ html{
 .navbar-inner li{
 	text-decoration: none;
 	list-style: none;
-	color:white;
-	float:left;
+	float:right;
+	margin-top: 10px;
 	padding-left: 10px;
 	font-family: 'Open Sans';
 	padding-right: 10px;
@@ -46,6 +46,12 @@ html{
 
 .navbar li a{
 	text-decoration: none;
+	float: right;
+}
+.navbar .navbar-inner {
+	opacity: 0.8;
+    background-color: #ECF0F1;
+    background-image: none;
 }
 
 
@@ -53,6 +59,7 @@ html{
 
 .main{
 	font-family: 'Open Sans';
+	background-color:#F4F4F4;
 }
 
 .info{
@@ -109,6 +116,30 @@ html{
 	margin-top: 60px;
 }
 
+/******* PANELS *******/
+
+.leftpanel, .rightpanel{
+	padding:10px;
+	margin: 20px;
+	margin-left: 30px;
+	border: 1px solid #8ABEF2;
+	border-radius: 5px;
+	/*background-color: #f4f4f4;*/
+	float: left;
+}
+
+.leftpanel{
+	margin: 30px;
+	margin-left: 30px;
+	height: 400px;
+	width: 300px
+}
+
+.rightpanel{
+	margin: 30px;
+	height: 400px;
+	width: 600px
+}
 /******* FORMS *******/
 
 .formcontainer{

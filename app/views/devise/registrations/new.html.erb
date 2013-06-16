@@ -4,9 +4,9 @@
 	<br />
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
-	  <div><%= f.email_field :first_name, :autofocus => true, :placeholder => "Name" %></div>
+	  <div><%= f.text_field :first_name, :autofocus => true, :placeholder => "Name" %></div>
 
-	  <div><%= f.email_field :email, :autofocus => true, :placeholder => "Email" %></div>
+	  <div><%= f.email_field :email, :placeholder => "Email" %></div>
 
 	 
 	  <div><%= f.password_field :password,:placeholder =>"Password" %></div>
@@ -14,7 +14,7 @@
 	 
 	  <div><%= f.password_field :password_confirmation, :placeholder =>"Password Confirmation"  %></div>
 
-	  <div><%= f.email_field :number, :autofocus => true, :placeholder => "Phone Number" %></div>
+	  <div><%= f.text_field :number, :placeholder => "Phone Number" %></div>
 	  <br />
 	  <div><%= f.submit "Sign up",  :class => "bluebutton"%></div>
 	<% end %>
