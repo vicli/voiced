@@ -83,7 +83,18 @@
 				</div>
 				<div class = "record" id="record" style="width: 50px;cursor:pointer;" onclick="toggleRecording(this)" class="pull-left">Record</div>
 				<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" class="pull-left" onclick="saveAudio();">
+				<p>OR</p>
+				<select name="voices">
+					<option value="1">Voice 1</option>
+					<option value="2">Voice 2</option>
+					<option value="3">Voice 3</option>
+					<option value="4">Voice 4</option>
+				</select>
 				<input type = "text" name = "datetime" id = "datetime" placeholder = "Select time and date">
+				<input type = "text" name = "number" id = "number" placeholder = "Enter Number">
+				<input type = "textarea" name = "texttospeech" id = "texttospeech" height = "30px" placeholder = "Enter Text">
+				<input type="checkbox" name="self" value="self">Self<br>
+				<input type="submit" value="Submit">
 			</div>
 		</form>
 
