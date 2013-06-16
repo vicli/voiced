@@ -3,7 +3,7 @@ class ReminderController < ApplicationController
 	before_filter :check_permissions
 
 	def create
-		if @reminder
+		if Reminder.create(params[:reminder])
 			respond_with @reminder
 		else
 			respond_with @reminder.errors
