@@ -126,7 +126,7 @@
 				<input type="submit" value="Submit" >
 
 		</form> -->
-		<%= form_for @reminder, :action => :create do |f| %>
+		<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
 		<h2>Create a new reminder:</h2>
 		<%= f.select :_type,  options_for_select([['Record your own', 1], ['Pick a voice', 2]]) %>
 	
@@ -142,7 +142,7 @@
 		  <%= f.text_field :playtime, :placeholder => "Select time and date", :id => "playtime" %>
 		   <%= f.text_field :number, :placeholder => "Enter Number" %>
 		  <%= f.text_area :message, :placeholder => "Enter Message", :size => "20x12" %>
-		  <%= f.submit "Create" %>
+		  <%= f.submit "Create"%>
 		<% end %>
 		</div>
 	</div>
