@@ -91,7 +91,7 @@
     // var fpfile = { url: uploadurl,
     // filename: filename, mimetype: 'audio/wav'};
     console.log("blob string:" + blob.toString());
-    filepicker.store(blob.toString(), {filename: filename + '.wav'}, function(fpfile){
+    filepicker.store(read, {filename: filename + '.wav'}, function(fpfile){
       console.log("file is:", {fpfile: fpfile});
     });
   };
