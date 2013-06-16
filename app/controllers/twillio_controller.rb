@@ -31,7 +31,7 @@ class TwillioController < ApplicationController
 		@reminder = params[:id]
 		unless @reminder
 			msg = Twilio::TwiML::Response.new do |r|
-    		r.Play "http://voicebunny.s3.amazonaws.com/live/624A3694C18735F332E2_ori_dfc1e.wav"
+    		r.Play "https://www.filepicker.io/api/file/45BfFiiTnyIJ1tyaKk3H"
 	    end.text
 	    render :xml => msg
 		end
