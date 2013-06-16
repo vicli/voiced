@@ -1,5 +1,5 @@
 
-(function(window){
+(function(window, $){
 
   var WORKER_PATH = 'recorderWorker.js';
 
@@ -64,7 +64,6 @@
         type: type
       });
     };
-
     worker.onmessage = function(e){
       var blob = e.data;
       currCallback(blob);
@@ -73,30 +72,17 @@
     source.connect(this.node);
     this.node.connect(this.context.destination);    //this should not be necessary
   };
-
   Recorder.forceDownload = function(blob, filename){
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
-    alert ('url in downlaod is ' + url);
-    var link = window.document.createElement('a');
-    link.href = url;
-    link.download = filename || 'output.wav';
-    var click = document.createEvent("Event");
-    click.initEvent("click", true, true);
-    link.dispatchEvent(click);
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function(data, status, jqXHR){
+        filepicker.store(data, {filename: filename + '.wav'}, function(fpfile){
+          Reminder.setURL(fpfile.url);
+        });
+      }
+    })
   };
-
-  Recorder.upload = function(blob, filename){
-    // var uploadurl = (window.URL || window.webkitURL).createObjectURL(blob);
-    console.log("blob is:", {blob: blob });
-    // var fpfile = { url: uploadurl,
-    // filename: filename, mimetype: 'audio/wav'};
-    console.log("blob string:" + blob.toString());
-    filepicker.store(read, {filename: filename + '.wav'}, function(fpfile){
-      console.log("file is:", {fpfile: fpfile});
-    });
-  };
-
-
   window.Recorder = Recorder;
-
 })(window);

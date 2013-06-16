@@ -11,9 +11,9 @@ class Reminder < ActiveRecord::Base
   								# 1        #2     
   attr_accessible :file, :message, :gender
 
-  # validates_presence_of :name, :number, :playtime, :type
-  # validates_presence_of :file, :if => "type == 1"
-  # validates_presence_of :message, :gender, :if => "type == 2"
+  validates_presence_of :name, :number, :playtime, :type
+  validates_presence_of :file, :if => "type == 1"
+  validates_presence_of :message, :gender, :if => "type == 2"
 
   belongs_to :caller, :class_name => "User", 
   					 :foreign_key => "caller_id"
@@ -22,7 +22,7 @@ class Reminder < ActiveRecord::Base
 
 	def trigger
 		if _type == 1
-			return play_file params
+			return play_file
 		elsif _type == 2
 			return speech_text
 		end
