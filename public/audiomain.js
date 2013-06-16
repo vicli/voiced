@@ -26,8 +26,6 @@ function drawWave( buffers ) {
 
 function doneEncoding( blob ) {
     Recorder.forceDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
-    var name = "myRecording" + ((recIndex<10)?"0":"") + recIndex;
-    Recorder.upload(blob, name);
     recIndex++;
 }
 
