@@ -6,8 +6,8 @@ Voiceapp::Application.routes.draw do
   match '/trigger' => "twillio#trigger"
   match '/trigger_reminder' => "twillio#trigger_reminder"
   match '/reminders' => "reminder#create"
-  match '/user/:id' => "user#show"
-  match '/user'    => "user#create", :via => ["post"]
+  # match '/user/:id' => "user#show"
+  # match '/user'    => "user#create", :via => ["post"]
 
 
   # The priority is based upon order of creation:
