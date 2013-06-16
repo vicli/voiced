@@ -9,11 +9,13 @@ var AppViews = function() {
 	}
 }
 
-var FeedItemView = function() {
-	template = _.template($("#feed-item-template"));
-	_.extend(model, window.view_helper)
+var FeedItemView = function(model) {
+	template = _.template($("#feed-item-template").html());
 	templatize = function(model) {
+		if (!model.caller) model.caller = false;
+		if (!model.callee) model.callee = false;
+		_.extend(model, window.view_helper)
 		return $.parseHTML(template(model));
 	}
-	return templatize;
+	return templatize(model);
 }
