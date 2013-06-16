@@ -32,11 +32,11 @@ var VoiceRecording = function() {
 window.view_helper = {
 	pretty_date : function(date_str) {
 	  var seconds = this.get_seconds(date_str);
-	  var token = 'ago';
+	  var token = 'from now';
 	  list_choice = 1;
 	  if (seconds < 0) {
 	      seconds = Math.abs(seconds);
-	      token = 'from now';
+	      token = 'ago';
 	      list_choice = 2;
 	  }
 	  var i = 0,
@@ -58,9 +58,9 @@ window.view_helper = {
 
 	time_formats : [
     [60, 'just now', 1], // 60 
-    [120, '1 minute ago', '1 minute from now'], // 60*2
+    [120, '1 minute from now', '1 minute ago'], // 60*2
     [3600, 'minutes', 60], // 60*60, 60
-    [7200, '1 hour ago', '1 hour from now'], // 60*60*2 
+    [7200, '1 hour from now', '1 hour ago'], // 60*60*2 
     [86400, 'hours', 3600], // 60*60*24, 60*60 
     [172800, 'yesterday', 'tomorrow'], // 60*60*24*2 
     [604800, 'days', 86400], // 60*60*24*7, 60*60*24 
@@ -72,5 +72,14 @@ window.view_helper = {
     [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12 
     [5806080000, 'last century', 'next century'], // 60*60*24*7*4*12*100*2 
     [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
-	]
+	],
+
+	get_seconds : function(date_str) {
+    var time = ('' + date_str).replace(/-/g, "/").replace(/[TZ]/g, " ");
+    var seconds = ((new Date).getTime() - (new Date(time)).getTime()) / 1000;
+    // Quick timezone hack for this submission while I figure out how to
+    // fix this issue.
+    seconds += 60*60*4;
+    return seconds;
+  }
 }

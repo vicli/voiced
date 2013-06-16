@@ -79,7 +79,7 @@
       url: url,
       success: function(data, status, jqXHR){
         filepicker.store(data, {filename: filename + '.wav'}, function(fpfile){
-          $("reminder_form").preprend("<input type=\"hidden\" name=\"file\" value=\""+fpfile.url+"\"/>");
+          $("#reminder_form").preprend("<input type=\"hidden\" name=\"file\" value=\""+fpfile.url+"\"/>");
         });
       }
     })

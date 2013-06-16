@@ -41,43 +41,6 @@
 
 	<div class="rightpanel">
 		<div id="feed">
-			<div class="feed-item clearfix">
-				<div class="feed-icon pull-left">
-					<img src="../s1.png">
-				</div>
-				<div style="width:10px; height: 40px; float:left"></div>
-				<div class="feed-content">
-					<b>Your</b><a href="#">voice notification</a> for <b><a href="#">Victoria</a></b> went off <b> 5 minutes ago </b>. <a>Setup another one?</a>
-				</div>
-			</div>
-			<div class="feed-item clearfix">
-				<div class="feed-icon pull-left">
-					<img src="../s2.png">
-				</div>
-				<div style="width:10px; height: 40px; float:left"></div>
-				<div class="feed-content">
-					<b>You</b> setup a <a href="#">voice notification</a> for <b><a href="#">Victoria</a>  10 minutes ago </b>. <a>Setup another one?</a>
-				</div>
-			</div>
-			<div class="feed-item clearfix">
-				<div class="feed-icon pull-left">
-					<img src="../s2.png">
-				</div>
-				<div style="width:10px; height: 40px; float:left"></div>
-				<div class="feed-content">
-					<b><a href="#">Victoria</a></b> setup a voice notification for you for  <b> tomorrow</b>
-				</div>
-				<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg"></img>
-			</div>
-			<div class="feed-item clearfix">
-				<div class="feed-icon pull-left">
-					<img src="../s1.png">
-				</div>
-				<div style="width:10px; height: 40px; float:left"></div>
-				<div class="feed-content">
-					<b>Your</b> <a href="#">voice notification</a> for <b><a href="#">Victoria</a></b> went off <b> 5 minutes ago </b>. <a href="#">Setup another one?</a>
-				</div>
-			</div>
 		</div>
 
 		<script type="text/javascript">
@@ -154,24 +117,41 @@
 		</div>
 		<div style="width:10px; height: 40px; float:left"></div>
 		<div class="feed-content">
-			[[ if  (window.user.id == callee.id && (Date.parse(playtime)- (new Date())) >0 ){ ]]
+			[[ if  (window.user.id == callee.id && (Date.parse(playtime)- (new Date()) > 0 ) ){ ]]
 
-				<b><a href="/users/"+[[=caller.id]]>[[= caller.first_name ]]</a></b> has set up a reminder for you for <b>[[= pretty_date(playtime) ]]</b>
+				<b>
+				[[ if (caller && caller.id) { ]]<a href="/users/"+[[=caller.id]]>
+					[[= caller.first_name ]]
+				</a>
+				[[ } else { ]]
+					[[= number ]]
+				[[ } ]]
+				</b> has set up a reminder for you for <b>[[= pretty_date(playtime) ]]</b>
 
-			[[ } else if (window.user.id == caller.id && (Date.parse(playtime)- (new Date())))>0 { ]]
-				<b>You</b> have set up a reminder for <b><a href="/users/"+[[= callee.id ]]>[[= callee.name ]]</a></b> for <b>[[= pretty_date(playtime) ]]
+			[[ } else if (caller && window.user.id == caller.id && (Date.parse(playtime)- (new Date()) > 0)) { ]]
+				<b>You</b> have set up a reminder for <b>
+				[[ if (callee && callee.name) { ]]<a href="/users/"+[[= callee.id ]]>
+					[[= callee.name ]]
+			</a>[[ } else { ]][[= number ]][[ } ]]</b> for <b>[[= pretty_date(playtime) ]]
 
 			[[ } else { ]]
-				<b>Your</b> reminder for <b><a href="/users/"+[[= callee.id ]]>[[= callee.name ]]</a></b> went off [[= pretty_date(playtime) ]]
+				<b>Your</b> reminder for <b>
+
+				[[ if (callee && callee.name) { ]]<a href="/users/"+[[= callee.id ]]>
+					[[= callee.name ]]
+			</a>[[ } else { ]][[= number ]][[ } ]]</b> went off [[= pretty_date(playtime) ]]
 			[[ } ]]
 		</div>
-		<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="[[= accepted ? 'http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg' : 'error']]"></img>
+		<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg"></img>
 	</div>
 </script>
 
 <script type="text/javascript">
 	$(function(){
         $("#playtime").datetimepicker();
+        _.each(user.reminders, function(reminder) {
+        	$("#feed").append(FeedItemView(reminder));
+        });
     });
 	
 </script>
