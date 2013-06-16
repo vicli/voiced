@@ -24,7 +24,7 @@
 		<div class = "newrecord">
 			<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
 
-			<%= f.select :_type,  options_for_select([['Select', 0],['Record your own', 1], ['Pick a voice', 2]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
+			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
 
 			<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
 					<div style="width: 100px;  padding: 0px 3px 3px 0px">
@@ -39,7 +39,7 @@
 					<div><%= f.text_area :message, :style => "width:250px",:placeholder => "Enter Message", :size => "20x2" %></div>
 				</div>
 			  <div><%= f.text_field :playtime, :style => "width:250px",:placeholder => "Select time and date", :id => "playtime" %></div>
-			  
+
 			   <div><%= f.text_field :number, :style => "width:250px", :placeholder => "Enter Number" %></div>
 			  
 			  <%= f.submit "Create", :id=>"create_reminder" %>
@@ -51,7 +51,21 @@
 			d = document.getElementById("choice_id").value;
 			if (d ==1){
 				$('#voice').hide();
-				$('.record-panel.clearfix').slideToggle(600);
+				filepicker.pickAndStore({
+			    	mimetype:"audio/*",
+			    	'multiple': false
+			    },
+			    {
+			    	location:"S3",
+			  	}, 
+			    function(fpfiles){
+			    	_.each(fpfiles, function(file){
+			    	$("[name='reminder[file]']").remove();
+			    	$("#new_reminder").prepend("<input type=\"hidden\" name=\"reminder[file]\" value=\""+file.url + "\"/>");
+			    	console.log(file);
+			    	$("#choice_id").after("<div id='upload_file_name'>"+file.filename+"</div>");
+			    	});
+				});
 			}
 			if (d ==2){
 				$('.record-panel.clearfix').hide()

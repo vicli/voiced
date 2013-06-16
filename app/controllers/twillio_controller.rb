@@ -7,7 +7,7 @@ class TwillioController < ApplicationController
 		@call = @client.account.calls.create(
 		  :from => '+13476172295',
 		  :to => '+16173592736',
-		  :url => 'http://voicechat.herokuapp.com/trigger_reminder?id='+params[:id]
+		  :url => 'http://pure-falls-2527.herokuapp.com/trigger_reminder?id='+params[:id]
 		)
 		redirect_to root_url
 	end
