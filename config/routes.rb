@@ -6,7 +6,7 @@ Voiceapp::Application.routes.draw do
     root :to => "home#index"
   end
   devise_for :users do
-    get "/uers", :to => "home#index"
+    gget "/users", :to => "home#index"
   end
   namespace :user do
     root :to => "home#index"
