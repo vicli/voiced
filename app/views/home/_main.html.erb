@@ -126,9 +126,10 @@
 				<input type="submit" value="Submit" >
 
 		</form> -->
-		<%= form_for @reminder do |f| %>
+		<%= form_for @reminder, :action => :create do |f| %>
 		<h2>Create a new reminder:</h2>
-		<%= select_tag(:_type,  options_for_select([['Record your own', 1], ['Pick a voice', 2]])) %>
+		<%= f.select :_type,  options_for_select([['Record your own', 1], ['Pick a voice', 2]]) %>
+	
 		<div class="record-panel clearfix" id = "recordpanel" style="position: relative;">
 				<div class="pull-left" style="width: 100px; padding: 0px 3px 3px 0px">
 					<canvas id="analyser" width="100" height="20"></canvas>
@@ -137,9 +138,8 @@
 				<div class = "record" id="record" style="width: 50px;cursor:pointer;" onclick="toggleRecording(this)" class="pull-left">Record</div>
 				<div class ="save" style="width: 50px;cursor:pointer;" class="pull-left" onclick="saveAudio();">Save</div>
 			</div>
-			<%= select_tag(:gener,  options_for_select([['Female', 1], ['male', 2]])) %>
+			<%= f.select :gender, options_for_select([['Female', 1], ['male', 2]]) %>
 		  <%= f.text_field :playtime, :placeholder => "Select time and date", :id => "playtime" %>
-		   <%= f.text_field :callee, :placeholder => "Enter Friend" %>
 		   <%= f.text_field :number, :placeholder => "Enter Number" %>
 		  <%= f.text_area :message, :placeholder => "Enter Message", :size => "20x12" %>
 		  <%= f.submit "Create" %>
@@ -168,9 +168,11 @@
 		<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="[[= accepted ? 'http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg' : 'error']]"></img>
 	</div>
 </script>
+
 <script type="text/javascript">
 	$(function(){
         $("#playtime").datetimepicker();
     });
 	
 </script>
+
