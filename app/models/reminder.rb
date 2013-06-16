@@ -32,7 +32,8 @@ class Reminder < ActiveRecord::Base
 	def play_file
 		response = Twilio::TwiML::Response.new do |r|
   		r.Play file
-	  end
+	  end.text
+	  return response
 	end
 
 	def speech_text

@@ -31,7 +31,7 @@ class TwillioController < ApplicationController
 		@reminder = Reminder.find_by_id(params[:id])
 		unless @reminder
 			msg = Twilio::TwiML::Response.new do |r|
-	      r.Say 'This reminder does not exist'
+	      r.Play "http://www.terminatorfiles.com/media/audio/t2/hasta-la-vista-baby.wav"
 	    end.text
 	    render :xml => msg
 		end
