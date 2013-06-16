@@ -13,6 +13,23 @@
 
 ActiveRecord::Schema.define(:version => 20130615192540) do
 
+  create_table "reminders", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "playtime"
+    t.string   "image"
+    t.string   "number"
+    t.integer  "caller_id"
+    t.integer  "callee_id"
+    t.integer  "_type"
+    t.boolean  "triggered",   :default => false
+    t.string   "file"
+    t.string   "message"
+    t.string   "gender"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false

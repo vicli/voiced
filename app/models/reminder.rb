@@ -1,24 +1,46 @@
+require 'twilio-ruby'
 class Reminder < ActiveRecord::Base
-
 	# => enum type
-	# => 	1: Audio File with URL (via Filepicker)
-	# => 	2: Audio via Twilio
-	# => 	3: Text to Speech
-	# => 	4: Voicebunny
+	# => 	1: Audio File with URL (via Filepicker/Voice Bunny)
+	# => 	2: Text to Speech
 
-  attr_accessible :description, :image, :name, :type
-  								:number, :playtime, :caller, :callee
 
-  								# 1        #2           #3       
-  attr_accessible :file_url, :twiml_audo, :vb_file, 
-  								#4
-  								:text_to_speech, :gender
+  attr_accessible :name, :description, :playtime, :image,
+  								:number, :caller, :callee, :_type, :triggered
 
-  validates_presence_of :name, :number, :caller, :playtime, :type
+  								# 1        #2     
+  attr_accessible :file, :message, :gender
+
+  # validates_presence_of :name, :number, :playtime, :type
+  # validates_presence_of :file, :if => "type == 1"
+  # validates_presence_of :message, :gender, :if => "type == 2"
 
   belongs_to :caller, :class_name => "User", 
   					 :foreign_key => "caller_id"
-  belongs_to :calee, :class_name => "User", 
+  belongs_to :callee, :class_name => "User", 
   					 :foreign_key => 'callee_id'
+
+	def trigger
+		if _type == 1
+			return play_file params
+		elsif _type == 2
+			return speech_text
+		end
+		return false
+	end
+
+	def play_file
+		response = Twilio::TwiML::Response.new do |r|
+  		r.Play file
+	  end.text
+	  return response
+	end
+
+	def speech_text
+		response = Twilio::TwiML::Response.new do |r|
+			r.Say message, :voice => gender
+		end.text
+		return response
+  end
 
 end
