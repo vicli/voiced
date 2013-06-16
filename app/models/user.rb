@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-  								:name, :image
+  								:name, :profile_image
 
   # http://railscasts.com/episodes/163-self-referential-association
 	has_many :friendships

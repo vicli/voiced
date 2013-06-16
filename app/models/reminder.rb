@@ -22,7 +22,7 @@ class Reminder < ActiveRecord::Base
 
 	def trigger
 		if _type == 1
-			return play_file params
+			return play_file
 		elsif _type == 2
 			return speech_text
 		end
