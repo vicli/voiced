@@ -15,6 +15,8 @@ end
 
 gem 'devise'
 gem 'twilio-ruby'
+gem 'faraday'
+gem 'faraday_middleware'
 
 gem "flat-ui-rails"
 gem 'bootstrap-sass', '~> 2.3.2.0'

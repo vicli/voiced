@@ -21,11 +21,19 @@
 <body style="background-color:#232323;">
 	<div class = "leftpanel">
 		<h3 onclick = "$('.newrecord').slideToggle(600);" style = "text-align:center; cursor: pointer" class = "newreminder"> New Reminder</h3>
-		<div class = "newrecord">
+		<div class = "newrecord" style="color: #efefef;">
 			<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
 
 			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2], ['Hire voice actor', 3]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
-
+				<div id="voice-bunny-module" style="display: none;">
+					<div id="search">Search</div>
+						<input id="keywords" placeholder="ex: sexy, cool, etc."></input>
+						<div id="vb-search" class="btn btn-primary" style="margin-top: 10px; cursor: pointer;">Submit</div>
+						<div id="alternatively" style="height: 30px; padding: 5px;">
+							Alternatively <a href="http://voicebunny.com/">search on VoiceBunny</a>
+						</div>
+					</div>
+				</div>	
 				<div class="record-panel clearfix" id = "recordpanel" style="width:200px;display:none; position: relative; text-align:center">
 					<div><%= f.text_field :file, :style=> "width:250px", :placeholder => "Url to Audio file", :id=> "file"%></div>
 <!-- 					<div style="width: 100px;  padding: 0px 3px 3px 0px">
@@ -39,37 +47,42 @@
 					<div><%= f.select :gender, options_for_select([['Female', 1], ['Male', 2]]), {}, {:style => "min-width:250px"}%></div>
 					<div><%= f.text_area :message, :style => "width:250px",:placeholder => "Enter Message", :size => "20x2" %></div>
 				</div>
-			  <div><%= f.text_field :playtime, :style => "width:250px",:placeholder => "Select time and date", :id => "playtime" %></div>
+				<div id="restt" style="display: none;">
+				  <div><%= f.text_field :playtime, :style => "width:250px",:placeholder => "Select time and date", :id => "playtime" %></div>
 
-			   <div><%= f.text_field :number, :style => "width:250px", :placeholder => "Enter Number" %></div>
-			  
-			  <%= f.submit "Create", :id=>"create_reminder" %>
+				   <div><%= f.text_field :number, :style => "width:250px", :placeholder => "Enter Number" %></div>
+				    <%= f.submit "Create", :id=>"create_reminder" %>
+				</div>
 			<% end %>
 		</div>
 	</div>
 	<script type="text/javascript">
 		function change() {
 			d = document.getElementById("choice_id").value;
-			if (d ==1){
+			$("#restt").hide();
+			if (d ==1) {
 				$('#voice').hide();
 				$('.record-panel.clearfix').slideToggle(400);
+				$("#restt").show();
+				$("#voice-bunny-module").hide();
 			}
-			if (d ==2){
+			else if (d ==2) {
 				$('.record-panel.clearfix').hide()
 				$('#voice').slideToggle(400);
+				$("#voice-bunny-module").hide();
+				$("#restt").show();
+			}
+			else if (d==3) {
+				$("#restt").hide();
+				$(".record-panel.clearfix").hide();
+				$("#voice").hide();
+				$("#voice-bunny-module").slideToggle(400);
 			}
 		}
 	</script>
-
 	<div class="rightpanel">
-
-
-
-
-
 		<div id="feed">
 		</div>
-
 		<script type="text/javascript">
 		$('#recordoption').on('change', function() {
 		    var val = $(this).val();
@@ -95,7 +108,19 @@
 
 
 </div>
-
+	<script type="text/template" id="vb-template">
+	<div class="clearfix"></div>
+    <div class="search-wrapper" id = "2">
+      <a href='[[= url ]]' style='background-image: url('/play.png');' class="pull-left; display: block; float: left; height:50px; background-size: 50px 50px;">
+      </a>
+      <div class="top-info pull-left">
+        <a href="http://http://voicebunny.com/search/samples/[[= talentID]]" class="title">See more of this voice actor</a>
+        <span class="gender">[[= genderAndAge ]]</span>
+      </div>
+    </div>
+	  <div class="pull-right">
+	    <div class="price">[[= price ? price : "Price Unlisted" ]]</div>
+  </script>
 <script type="text/template" id="feed-item-template">
 	<div class="feed-item clearfix">
 		<div class="feed-icon pull-left">
@@ -135,13 +160,49 @@
 	$(function(){
         $("#playtime").datetimepicker({timeFormat: " hh:mm:ss"});
         _.each(user.reminders, function(reminder) {
-        	$("#feed").append(FeedItemView(reminder));
+        	el = $(FeedItemView(reminder));
+        	el.find(".delete").click(function(){
+        		$.ajax({
+        			url: "/reminders/"+reminder.id,
+        			type: "POST"
+        		});
+        	})
+        	$("#feed").append();
+
         });
         $("#create_reminder").bind("click", function(e){
         	$("#playtime").val(new Date(Date.parse($("#playtime").val())));
         });
     });
-	
+</script>
+	<div style="position:absolute; background-color: rgba(0,0,0,.7); display:none" id="modal">
+		<div style="color: #111; position: absolute; left: 650px; top: 100px; background-color: #fff;padding: 10px" id="modal-inner">
+			Loading...
+		</div>
+	</div>
+
+	<script>
+		$("#vb-search").click(function(e){
+				var template = _.template($("#vb-template").html());
+				$("#modal").show();
+				$.ajax({
+					url: "/search",
+					data: {
+						keyword: $("#keywords").val()
+					},
+					success: function(data) {
+						console.log("success");
+						$("#keywords").val("");
+						$("#modal-inner").html("");
+						_.each(data['samples'], function(sample){
+							var html = template(sample);
+							$("#modal-inner").append(html);
+						});
+					}
+				});
+			console.log("vb click"); 	
+			e.preventDefault();
+		});
+
 </script>
 </body>
-
