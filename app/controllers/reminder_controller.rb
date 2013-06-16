@@ -11,7 +11,7 @@ class ReminderController < ApplicationController
 		p "in createe"
 		if @user.reminders.create(params[:reminder])
 			p "created reminder"
-			redirect_to root_url
+			redirect_to :controller => "twillio", :action => "trigger", :id => @user.reminders.last.id
 		else
 			respond_with @reminder.errors
 		end

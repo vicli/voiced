@@ -113,6 +113,15 @@ html{
 	text-align: center;
 }
 
+#create_reminder{
+	background-color: #2980B9;
+	min-width: 100px;
+	border: none;
+	border-radius: 6px;
+	padding: 10px;
+	color:#ffffff;
+	font-size: 18px;
+}
 .bluebutton{
 	background-color: #2980B9;
 	min-width: 100px;
@@ -159,9 +168,9 @@ html{
 	margin: 5px;
 	padding: 5px;
 	height: 25px;
-	
+	border-radius: 3px;
 	text-align: center;
-	background-color: #2C3E50;
+	background-color: #2980B9;;
 	color:white;
 	font-size: 14px;
 }
@@ -172,9 +181,9 @@ html{
 	margin: 5px;
 	padding: 5px;
 	height: 25px;
-	
+	border-radius: 3px;
 	text-align: center;
-	background-color: #2C3E50;
+	background-color: #2980B9;;
 	color:white;
 	font-size: 14px;
 }
