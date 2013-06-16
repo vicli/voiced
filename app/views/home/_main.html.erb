@@ -23,8 +23,8 @@
 		<h3 onclick = "$('.newrecord').slideToggle(600);" style = "text-align:center; cursor: pointer" class = "newreminder"> New Reminder</h3>
 		<div class = "newrecord" style="color: #efefef;">
 			<%= form_for @reminder, :id=>"reminder_form", :action => :create do |f| %>
-
-			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2], ['Hire voice actor', 3]]), {},{:onchange => "change()", :style => "min-width:250px",:id => "choice_id"} %>
+			<div style = "text-align:center">
+			<%= f.select :_type,  options_for_select([['Select', 0],['Upload your own', 1], ['Text to speech', 2], ['Hire voice actor', 3]]), {},{:onchange => "change()", :style => "min-width:265px; float:left;",:id => "choice_id"} %>
 				<div id="voice-bunny-module" style="display: none;">
 					<div id="search">Search</div>
 						<input id="keywords" placeholder="ex: sexy, cool, etc."></input>
@@ -52,6 +52,7 @@
 
 				   <div><%= f.text_field :number, :style => "width:250px;text-align:center", :placeholder => "Enter Number" %></div>
 				    <%= f.submit "Create", :id=>"create_reminder" %>
+				</div>
 				</div>
 			<% end %>
 		</div>
