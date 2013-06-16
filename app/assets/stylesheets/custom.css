@@ -29,6 +29,14 @@ html{
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
 	height:60px;
 }
+.navbar .nav li a {
+	color:#840000;
+}
+
+.navbar .nav li a:hover {
+	color: #C0392B;
+}
+
 .navbar .nav li{
 	float:right;
 	vertical-align: center;
@@ -139,6 +147,12 @@ html{
 	margin: 30px;
 	height: 400px;
 	width: 600px
+}
+
+.record{
+	width: 200px;
+	height: 50px;
+	background-color:blue;
 }
 /******* FORMS *******/
 

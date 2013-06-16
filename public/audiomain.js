@@ -33,12 +33,14 @@ function toggleRecording( e ) {
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
+        document.getElementById("record").style.color="#333333";
         e.classList.remove("recording");
         audioRecorder.getBuffers( drawWave );
     } else {
         // start recording
         if (!audioRecorder)
             return;
+         document.getElementById("record").style.color="#84000";
         e.classList.add("recording");
         audioRecorder.clear();
         audioRecorder.record();
