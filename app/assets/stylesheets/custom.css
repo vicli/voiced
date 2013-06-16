@@ -170,3 +170,30 @@ html{
 .form-signin{
 	text-align: center;
 }
+
+.feed-item {
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	background-color: #eee;
+	height: 60px;
+	border-top: 1px solid rgba(0,0,0,.2);
+}
+
+.feed-item:hover {
+	background-color: #ddd;
+	border-top: 1px solid rgba(0,0,0,.3);
+	border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+.feed-icon {
+	margin: 5px 0 0 10px;
+	background-position: 5px 5px;
+	padding: 5px;
+	width: 40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	background-color: #bce0e1;
+}
+
+.feed-content {
+	margin: 5px 0px 0px 10px;
+}

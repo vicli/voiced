@@ -6,17 +6,65 @@
 
 </div> -->
 
-<div class = "leftpanel">
-	<%= link_to "Edit",   edit_user_registration_path %>
-</div>
+<script>
+	var user = <%= raw current_user.to_json %>;
+	user['given_reminders'] = <%= raw current_user.given_reminders.to_json %>;
+	user['reminders'] = <%= raw current_user.reminders.to_json %>
 
-<div class = "rightpanel">
-	<div class = "recordPanel">
-	<canvas id="analyser" width="200" height="50"></canvas><br>
-	<canvas id="wavedisplay" width="200" height="40"></canvas><br>
-	<div class = "record" id = "record" onclick = "toggleRecording(this)">Record</div>
-	
-	<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" onclick="saveAudio();">
+</script>
+<div class="container">
+	<div class = "leftpanel">
+		<%= link_to "Edit",   edit_user_registration_path %>
+	</div>
 
-</div>
+	<div class="rightpanel">
+		<div id="feed">
+			<div class="feed-item clearfix">
+				<div class="feed-icon pull-left">
+				</div>
+				<div style="width:10px; height: 40px; float:left"></div>
+				<div class="feed-content">
+					<b>Your</b><a href="#">voice notification</a> for <b><a href="#">Victoria</a></b> went off <b> 5 minutes ago </b>. <a>Setup another one?</a>
+				</div>
+			</div>
+					<div id="feed">
+			<div class="feed-item clearfix">
+				<div class="feed-icon pull-left">
+				</div>
+				<div style="width:10px; height: 40px; float:left"></div>
+				<div class="feed-content">
+					<b>You</b> setup a <a href="#">voice notification</a> for <b><a href="#">Victoria</a>  10 minutes ago </b>. <a>Setup another one?</a>
+				</div>
+			</div>
+					<div id="feed">
+			<div class="feed-item clearfix">
+				<div class="feed-icon pull-left">
+				</div>
+				<div style="width:10px; height: 40px; float:left"></div>
+				<div class="feed-content">
+					<b><a href="#">Victoria</a></b> setup a voice notification for you for  <b> tomorrow</b>
+				</div>
+			</div>
+					<div id="feed">
+			<div class="feed-item clearfix">
+				<div class="feed-icon pull-left">
+				</div>
+				<div style="width:10px; height: 40px; float:left"></div>
+				<div class="feed-content">
+					<b>Your</b> <a href="#">voice notification</a> for <b><a href="#">Victoria</a></b> went off <b> 5 minutes ago </b>. <a href="#">Setup another one?</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="record-panel clearfix" style="display: none; position: relative;">
+			<div class="pull-left" style="width: 100px; padding: 0px 3px 3px 0px">
+				<canvas id="analyser" width="100" height="20"></canvas>
+				<canvas id="wavedisplay" width="100" height="20"></canvas>
+			</div>
+			<div id="record" style="width: 50px; height: 46px; bordar-radius: 10px; background-color: rgba(0,0,0,.1); cursor:pointer;" id="record" onclick="toggleRecording(this)" class="pull-left">Record</div>
+			<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" class="pull-left" onclick="saveAudio();">
+		</div>
+
+	</div>
 </div>
