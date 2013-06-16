@@ -6,7 +6,7 @@ class Reminder < ActiveRecord::Base
 
 
   attr_accessible :name, :description, :playtime, :image,
-  								:number, :caller, :callee, :_type, :triggered
+  								:number, :caller, :callee, :_type
 
   								# 1        #2     
   attr_accessible :file, :message, :gender

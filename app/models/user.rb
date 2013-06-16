@@ -15,5 +15,7 @@ class User < ActiveRecord::Base
 	has_many :friends, :through => :friendships
 	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 	has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :given_reminders, :class_name => "Reminder", :foreign_key => "caller_id"
+  has_many :reminders, :foreign_key => "callee_id"
 
 end
