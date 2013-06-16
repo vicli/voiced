@@ -10,9 +10,9 @@ class Reminder < ActiveRecord::Base
 
   								# 1        #2     
   attr_accessible :file, :message, :gender
-
-  validates_presence_of :name, :number, :playtime, :type
+ :type
   validates_presence_of :file, :if => "type == 1"
+  validates_presence_of :name, :number, :playtime, :unless => "type == 3"
   validates_presence_of :message, :gender, :if => "type == 2"
 
   belongs_to :caller, :class_name => "User", 

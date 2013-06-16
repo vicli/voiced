@@ -205,6 +205,9 @@ html{
 	border-bottom: 1px solid rgba(0,0,0,.2);
 	background-color: #eee;
 	height: 60px;
+}
+
+.feed-item:first {
 	border-top: 1px solid rgba(0,0,0,.2);
 }
 
@@ -225,7 +228,7 @@ html{
 }
 
 .feed-content {
-	margin: 5px 0px 0px 10px;
+	margin: 5px 60px 0px 10px;
 }
 
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }

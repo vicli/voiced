@@ -5,6 +5,14 @@
 	<img src="http://webaudiodemos.appspot.com/AudioRecorder/img/save.svg" onclick="saveAudio();">
 
 </div> -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+ <script type="text/javascript">
+    // rails uses  so I will use [[ ]] and [[= ]]
+    _.templateSettings = {
+        interpolate: /\[\[\=(.+?)\]\]/g,
+        evaluate: /\[\[(.+?)\]\]/g
+    };
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){
         $("#datetime").datetimepicker();
@@ -26,9 +34,10 @@
 
 
 <script>
-	var user = <%= raw current_user.to_json %>;
-	user['given_reminders'] = <%= raw current_user.given_reminders.to_json %>;
-	user['reminders'] = <%= raw current_user.reminders.to_json %>
+	window.user = <%= raw current_user.to_json %>;
+	user['reminders'] = <%= raw current_user.given_reminders.to_json %>.concat(<%= raw current_user.reminders.to_json %>).sort(function(a,b){
+		return a['playtime'] - b['playtime'];
+	});
 
 </script>
 
@@ -47,7 +56,6 @@
 					<b>Your</b><a href="#">voice notification</a> for <b><a href="#">Victoria</a></b> went off <b> 5 minutes ago </b>. <a>Setup another one?</a>
 				</div>
 			</div>
-					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
 					<img src="../s2.png">
@@ -57,7 +65,6 @@
 					<b>You</b> setup a <a href="#">voice notification</a> for <b><a href="#">Victoria</a>  10 minutes ago </b>. <a>Setup another one?</a>
 				</div>
 			</div>
-					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
 					<img src="../s2.png">
@@ -66,8 +73,8 @@
 				<div class="feed-content">
 					<b><a href="#">Victoria</a></b> setup a voice notification for you for  <b> tomorrow</b>
 				</div>
+				<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg"></img>
 			</div>
-					<div id="feed">
 			<div class="feed-item clearfix">
 				<div class="feed-icon pull-left">
 					<img src="../s1.png">
@@ -123,7 +130,29 @@
 				<input type = "textarea" name = "texttospeech" id = "texttospeech" height = "30px" placeholder = "Enter Text">
 				<input type="checkbox" name="self" value="self">Self<br>
 				<input type="submit" value="Submit" >
+
 		</form>
-
+		</div>
 	</div>
+</div>
 
+<script type="text/template" id="feed-item-template">
+	<div class="feed-item clearfix">
+		<div class="feed-icon pull-left">
+		</div>
+		<div style="width:10px; height: 40px; float:left"></div>
+		<div class="feed-content">
+			[[ if  (window.user.id == callee.id && (Date.parse(playtime)- (new Date())) >0 ){ ]]
+
+				<b><a href="/users/"+[[=caller.id]]>[[= caller.first_name ]]</a></b> has set up a reminder for you for <b>[[= pretty_date(playtime) ]]</b>
+
+			[[ } else if (window.user.id == caller.id && (Date.parse(playtime)- (new Date())))>0 { ]]
+				<b>You</b> have set up a reminder for <b><a href="/users/"+[[= callee.id ]]>[[= callee.name ]]</a></b> for <b>[[= pretty_date(playtime) ]]
+
+			[[ } else { ]]
+				<b>Your</b> reminder for <b><a href="/users/"+[[= callee.id ]]>[[= callee.name ]]</a></b> went off [[= pretty_date(playtime) ]]
+			[[ } ]]
+		</div>
+		<img class="pull-right" width="30px" height="30px" style="margin: -10px 20px 0px 0px;" src="[[= accepted ? 'http://vector.me/files/images/1/7/178682/green_checkmark_clip_art_preview.jpg' : 'error']]"></img>
+	</div>
+</script>
