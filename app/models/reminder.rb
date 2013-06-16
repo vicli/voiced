@@ -10,15 +10,19 @@ class Reminder < ActiveRecord::Base
 
   								# 1        #2     
   attr_accessible :file, :message, :gender
- :type
-  validates_presence_of :file, :if => "type == 1"
-  validates_presence_of :name, :number, :playtime, :unless => "type == 3"
-  validates_presence_of :message, :gender, :if => "type == 2"
+
+  validates_presence_of :file, :if => "_type == 1"
+  validates_presence_of :name, :number, :playtime, :unless => "_type == 3"
+  validates_presence_of :message, :gender, :if => "_type == 2"
 
   belongs_to :caller, :class_name => "User", 
   					 :foreign_key => "caller_id"
   belongs_to :callee, :class_name => "User", 
   					 :foreign_key => 'callee_id'
+
+  def as_json(options)
+  	super(:include => [:callee , :caller])
+  end
 
 	def trigger
 		if _type == 1
@@ -44,3 +48,4 @@ class Reminder < ActiveRecord::Base
   end
 
 end
+# User.first.reminders.create({ :message => "test", :_type=>2, :gender=>"male", name:"test", :playtime=>Time.now, :number=>"+13476172295"})
